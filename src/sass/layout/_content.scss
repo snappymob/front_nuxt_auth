@@ -29,3 +29,14 @@
         padding-top: 25px;
     }
 }
+
+// Non auth wrapper for not signed in users.
+// This non auth wrapper applied in Signin, Forgot Password
+// and Set New Password pages used to remove the padding top
+// same value of header height as no header will
+// be used in these pages based on new design
+.non-auth__wrap {
+    .v-main__wrap {
+        padding-top: 0;
+    }
+}

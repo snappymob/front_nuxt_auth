@@ -1,5 +1,6 @@
 <template>
     <v-app class="l-content_wrap">
+        <!-- Main Left Side Navigation Drawer -->
         <v-navigation-drawer v-if="auth.loggedIn"
                              id="c-navi_side"
                              v-model="drawer"
@@ -40,8 +41,8 @@
                 </v-list-item>
             </v-list>
         </v-navigation-drawer>
-
-        <v-app-bar :clipped-left="clipped" color="#1414A0" dense dark app :hide-on-scroll="!auth.loggedIn">
+        <!-- Main Top App Bar -->
+        <v-app-bar v-if="auth.loggedIn" :clipped-left="clipped" color="#1414A0" dense dark app :hide-on-scroll="!auth.loggedIn">
             <v-app-bar-nav-icon v-if="auth.loggedIn" @click.stop="drawer = !drawer" />
             <v-spacer />
 
@@ -59,11 +60,6 @@
                 <v-icon>mdi-exit-to-app</v-icon>
             </v-btn>
 
-            <!--
-      <div v-if="!auth.loggedIn">
-        <NuxtLink to="/signup"> Sign Up </NuxtLink>
-      </div>
-      -->
             <div v-if="!auth.loggedIn && !signUpPage">
                 <span class="d-none d-sm-inline">New to Muzica?</span><button class="c-btn c-btn_sm c-btn_dark ml-2" nuxt @click="go_page('/signup/')">
                     Sign Up
@@ -75,25 +71,23 @@
                 </button>
             </div>
         </v-app-bar>
-        <v-main>
-            <!--<br />
-      <div align="center" v-if="!auth.loggedIn">
-        <v-btn disable align> Logo Diverta Inc. </v-btn>
-      </div>
-      <br />-->
-            <v-container class="l-content_inner" fluid>
+        <v-main :class="auth.loggedIn ? '' : 'non-auth__wrap' ">
+            <template v-if="!auth.loggedIn">
+                <nuxt />
+            </template>
+            <v-container v-else class="l-content_inner" fluid>
                 <nuxt />
             </v-container>
         </v-main>
-
-        <v-footer color="#1414A0" padless>
+        <!-- Main Footer -->
+        <v-footer v-if="auth.loggedIn" color="#1414A0" padless>
             <v-row justify="center" no-gutters class="pt-3">
                 <a href="https://github.com/diverta/front_nuxt_auth"><small class="my-4 pt-3 l-footer_copyright">Github repository</small></a>
                 <a href="https://kuroco.app/"><img src="~/assets/images/logo-kuroco.svg" width="120" class="pl-4 l-footer_logo"></a>
                 <v-col class="#1414A0 text-center white--text" cols="12" />
             </v-row>
         </v-footer>
-
+        <!-- Main Snackbar -->
         <v-snackbar
             v-model="snackbarVisible"
             top
