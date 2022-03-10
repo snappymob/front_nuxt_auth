@@ -6,7 +6,7 @@
                 <v-col class="pa-0 col-sm-6 col-12">
                     <div class="p-login_intro">
                         <img src="~/assets/images/img_login-background.png" class="p-login_background">
-                        <img src="~/assets/images/img_members-cloud-logo.svg" width="225px" height="42px" class="p-login_logo">
+                        <img src="~/assets/images/img_members-cloud-white.png" width="225px" height="42px" class="p-login_logo">
                         <!-- <div class="p-login_intro-text">
                             <h1 class="heading">
                                 <span v-html="$t('login.welcomeback')"></span>

@@ -62,3 +62,14 @@
         color: $neutral300;
     }
 }
+
+.c-link {
+    &_icon {
+        display: flex;
+        align-items: center;
+
+        img {
+            margin-right: 18px;
+        }
+    }
+}
