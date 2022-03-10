@@ -14,13 +14,51 @@
     &_h2 {
         font-size: 1.6em;
     }
+
+    &_01--black {
+        font-weight: 900;
+        font-size: 2.4em;
+        color: $neutral900;
+        line-height: 1.2;
+    }
 }
 
-.c-link {
-    color: $color_main;
+.c-subheading {
+    font-weight: 400;
+    font-size: 0.8em; // TODO: fix this use em
+    color: $neutral400;
+}
 
-    &:hover {
-        text-decoration: none;
-        color: $color_main_dark;
+.c-body {
+    line-height: 1.4;
+    &_01--bold {
+        line-height: 1.6;
+        font-weight: 700;
+        font-size: 0.9em;
+        color: $primary500;
+    }
+    &_02--regular {
+        font-weight: 400;
+        font-size: 0.8em;
+        color: $neutral900;
+    }
+    &_02--medium {
+        font-weight: 500;
+        font-size: 0.8em;
+        color: $neutral300;
+    }
+    &_03--regular {
+        font-weight: 400;
+        font-size: 0.7em;
+        color: $neutral300;
+    }
+}
+
+.c-caption {
+    line-height: 1.2;
+    &_01--regular {
+        font-weight: 400;
+        font-size: 12px;
+        color: $neutral300;
     }
 }
