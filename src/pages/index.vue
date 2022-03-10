@@ -1,11 +1,13 @@
 <template>
     <client-only>
-        <div v-if="!auth.loggedIn" class="p-login_content elevation-7">
-            <v-row>
+        <!-- Main Login -->
+        <div v-if="!auth.loggedIn" class="p-login_content">
+            <v-row class="p-login_row">
                 <v-col class="pa-0 col-sm-6 col-12">
                     <div class="p-login_intro">
-                        <img src="~/assets/images/logo.png?width=150" class="p-login_logo">
-                        <div class="p-login_intro-text">
+                        <img src="~/assets/images/img_login-background.png" class="p-login_background">
+                        <img src="~/assets/images/img_members-cloud-logo.svg" width="225px" height="42px" class="p-login_logo">
+                        <!-- <div class="p-login_intro-text">
                             <h1 class="heading">
                                 <span v-html="$t('login.welcomeback')"></span>
                             </h1>
@@ -16,66 +18,76 @@
                                 <strong>{{$t('common.id')}}：</strong>demo@kuroco-mail.app<br>
                                 <strong>{{$t('common.password')}}：</strong>demo0512<br>
                             </p>
-                        </div>
+                        </div> -->
                     </div>
                 </v-col>
                 <v-col class="pa-0 col-sm-6 col-12">
-                    <v-card class="p-login_form" outlined>
+                    <div class="p-login_form">
                         <form @submit.prevent="login">
                             <div class="login-screen lgn-left">
                                 <v-card-title>
-                                    <h2 align="center" class="pb-4 c-text_blue">
-                                        {{ $t('common.sign_in') }}
+                                    <h2 class="mb-2 c-heading_01--black">
+                                        {{ $t('login.greeting') }}
                                     </h2>
+                                    <p class="c-body c-body_02--regular">{{$t('login.message')}}</p>
                                 </v-card-title>
                                 <v-card-text class="inner">
                                     <form @submit.prevent="login">
+                                        <div class="mb-3 c-body c-body_02--medium">
+                                            <label>{{$t('login.site_key')}}</label>
+                                        </div>
                                         <v-text-field
+                                            class="v-text-field-custom"
                                             v-model="sitekey"
-                                            :label="$t('login.site_key')"
                                             type="text"
-                                            outlined
+                                            solo
                                         />
+                                        <div class="mb-3 c-body c-body_02--medium">
+                                            <label>{{$t('login.id_or_email')}}</label>
+                                        </div>
                                         <v-text-field
+                                            class="v-text-field-custom"
                                             v-model="form.email"
-                                            :label="$t('login.id_or_email')"
                                             type="email"
-                                            outlined
+                                            solo
                                         />
+                                        <div class="mb-3 c-body c-body_02--medium">
+                                            <label>{{$t('common.password')}}</label>
+                                        </div>
                                         <v-text-field
+                                            class="v-text-field-custom"
                                             v-model="form.password"
-                                            :label="$t('common.password')"
                                             :type="show_pwd1 ? 'text' : 'password'"
                                             :append-icon="show_pwd1 ? 'mdi-eye' : 'mdi-eye-off'"
-                                            outlined
+                                            solo
                                             @click:append="show_pwd1 = !show_pwd1"
                                         />
-                                        <p>
-                                            <NuxtLink :to="localePath('/reminder')">
+                                        <div class="mb-5" align="right">
+                                            <NuxtLink :to="localePath('/reminder')" class="c-body_03--regular">
                                                 {{ $t('login.forget_password') }}
                                             </NuxtLink>
-                                        </p>
+                                        </div>
                                         <div class="text-center">
                                             <button
                                                 type="submit"
-                                                block
-                                                x-large
                                                 :loading="loading"
-                                                class="c-btn_dark c-btn submit-btn"
+                                                class="c-btn_main c-btn submit-btn"
                                             >
                                                 {{ $t('common.sign_in') }}
                                             </button>
-                                            <span v-html="$t('login.note')"></span>
+                                        </div>
+                                        <div class="pt-10 c-caption c-caption_01--regular">
+                                            <span>{{$t('login.note')}}</span>
                                         </div>
                                     </form>
                                 </v-card-text>
                             </div>
                         </form>
-                    </v-card>
+                    </div>
                 </v-col>
             </v-row>
         </div>
-
+        <!-- Main Dashboard -->
         <div v-else class="mypage">
             <v-carousel class="p-dashboard_banner">
                 <v-carousel-item

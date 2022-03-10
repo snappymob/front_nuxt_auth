@@ -1,10 +1,11 @@
 <template>
     <div class="p-login_content elevation-7">
-        <v-row>
+        <v-row class="p-login_row">
             <v-col class="pa-0 col-sm-6 col-12">
                 <div class="p-login_intro">
-                    <img src="~/assets/images/logo.png?width=150px" class="p-login_logo">
-                    <div class="p-login_intro-text">
+                    <img src="~/assets/images/img_login-background.png" class="p-login_background">
+                    <img src="~/assets/images/img_members-cloud-logo.svg" width="225px" height="42px" class="p-login_logo">
+                    <!-- <div class="p-login_intro-text">
                         <h1 class="heading">
                             <span v-html="$t('reminder.back_to_login')"></span>
                             <v-icon
@@ -17,32 +18,41 @@
                             </v-icon>
                         </h1>
                         <p v-html="$t('reminder.sign_up')"></p>
-                    </div>
+                    </div> -->
                 </div>
             </v-col>
             <v-col class="pa-0 col-sm-6 col-12">
-                <v-card v-if="e1 == 1" class="p-login_form" outlined>
+                <!-- Reset Password -->
+                <div v-if="e1 == 1" class="p-login_form">
                     <v-form
                         ref="form1"
                         v-model="valid"
                         lazy-validation
                         @submit.prevent="reminder"
                     >
-                        <v-card-title>
-                            <h2 align="center" class="pb-4 c-text_blue">
+                        <v-card-title class="flex-column align-start">
+                            <div class="c-link mb-3">
+                                <NuxtLink :to="localePath('/')" class="c-body_01--bold">
+                                    {{ $t('reminder.back_to_signin') }}
+                                </NuxtLink>
+                            </div>
+                            <h2 class="mb-2 c-heading_01--black">
                                 {{$t('reminder.password_reset')}}
                             </h2>
+                            <p class="c-body c-body_02--regular">{{$t('reminder.instruction')}}</p>
                         </v-card-title>
                         <v-container fluid>
                             <v-row>
                                 <v-col cols="12">
-                                    <p>{{$t('reminder.send_email')}}</p>
+                                    <div class="mb-3 c-body c-body_02--medium">
+                                        <label>{{$t('reminder.email_address')}}</label>
+                                    </div>
                                     <v-text-field
+                                        class="v-text-field-custom"
                                         v-model="email"
-                                        label="Email address"
                                         type="email"
                                         autocomplete="off"
-                                        outlined
+                                        solo
                                     />
                                 </v-col>
                             </v-row>
@@ -51,7 +61,7 @@
                                     <button
                                         type="submit"
                                         :loading="loading1"
-                                        class="c-btn c-btn_dark"
+                                        class="c-btn_main c-btn submit-btn"
                                     >
                                         {{$t('reminder.reset')}}
                                     </button>
@@ -59,30 +69,55 @@
                             </v-row>
                         </v-container>
                     </v-form>
-                </v-card>
-                <v-card v-else-if="e1 == 2" class="p-login_form">
+                </div>
+                <!-- Reset Password Success -->
+                <div v-else-if="e1 == 3" class="p-reminder_message">
+                    <v-card-title class="flex-column align-start">
+                        <div class="c-link mb-3">
+                            <NuxtLink :to="localePath('/')" class="c-body_01--bold">
+                                {{ $t('reminder.back_to_signin') }}
+                            </NuxtLink>
+                        </div>
+                        <h2 class="mb-2 c-heading_01--black">
+                            {{$t('reminder.forgot_your_password')}}
+                        </h2>
+                        <p class="c-body c-body_02--regular">{{$t('reminder.reset_success')}}</p>
+                    </v-card-title>
+                </div>
+                <!-- Set New Password -->
+                <div v-else-if="e1 == 2" class="p-login_form">
                     <v-form
                         ref="form2"
                         v-model="valid"
                         lazy-validation
                         @submit.prevent="set_password"
                     >
-                        <v-card-title>
-                            <h2 align="center" class="pb-4 c-text_blue">
+                        <v-card-title class="flex-column align-start">
+                            <div class="c-link mb-3">
+                                <NuxtLink :to="localePath('/')" class="c-body_01--bold">
+                                    {{ $t('reminder.back_to_signin') }}
+                                </NuxtLink>
+                            </div>
+                            <h2 class="mb-2 c-heading_01--black">
                                 <p>{{$t('reminder.set_password')}}</p>
                             </h2>
                         </v-card-title>
                         <v-container fluid class="p-login_content-inner">
                             <v-row>
                                 <v-col cols="12 py-0">
-                                    <p>{{$t('reminder.temp_password')}}</p>
-                                    <v-text-field v-model="temp_pwd" :type="text" label="" outlined />
+                                    <div class="mb-3 c-body c-body_02--medium">
+                                        <label>{{$t('reminder.temp_password')}}</label>
+                                    </div>
+                                    <v-text-field class="v-text-field-custom" v-model="temp_pwd" :type="text" label="" solo />
                                 </v-col>
                             </v-row>
                             <v-row>
                                 <v-col cols="12 py-0">
-                                    <p>{{$t('reminder.new_password')}}</p>
+                                    <div class="mb-3 c-body c-body_02--medium">
+                                        <label>{{$t('reminder.new_password')}}</label>
+                                    </div>
                                     <v-text-field
+                                        class="v-text-field-custom"
                                         v-model="login_pwd"
                                         :append-icon="password_show ? 'mdi-eye' : 'mdi-eye-off'"
                                         :rules="[rules.required, rules.password_min]"
@@ -90,15 +125,18 @@
                                         label=""
                                         :hint="$t('reminder.rule')"
                                         counter
-                                        outlined
+                                        solo
                                         @click:append="password_show = !password_show"
                                     />
                                 </v-col>
                             </v-row>
                             <v-row>
                                 <v-col cols="12 pt-0">
-                                    <p>{{$t('reminder.conf_password')}}</p>
+                                    <div class="mb-3 c-body c-body_02--medium">
+                                        <label>{{$t('reminder.conf_password')}}</label>
+                                    </div>
                                     <v-text-field
+                                        class="v-text-field-custom"
                                         v-model="login_pwd2"
                                         :append-icon="password_show2 ? 'mdi-eye' : 'mdi-eye-off'"
                                         :rules="[
@@ -110,76 +148,40 @@
                                         label=""
                                         :hint="$t('reminder.rule')"
                                         counter
-                                        outlined
+                                        solo
                                         @click:append="password_show2 = !password_show2"
                                     />
                                 </v-col>
                             </v-row>
                             <v-row>
                                 <v-col cols="12">
-                                    <v-btn
+                                    <button
                                         type="submit"
-                                        block
-                                        x-large
                                         color="success"
-                                        dark
                                         :loading="loading2"
+                                        class="c-btn_main c-btn submit-btn"
                                     >
                                         {{$t('reminder.submit')}}
-                                    </v-btn>
+                                    </button>
                                 </v-col>
                             </v-row>
                         </v-container>
                     </v-form>
-                </v-card>
-                <v-card v-else-if="e1 == 4">
-                    <v-form
-                        ref="form1"
-                        v-model="valid"
-                        lazy-validation
-                        @submit.prevent="reminder"
-                    >
-                        <v-container fluid class="p-login_content-inner">
-                            <v-row>
-                                <v-col cols="12">
-                                    <p align="center">
-                                        {{$t('reminder.update_ok')}}
-                                    </p>
-                                </v-col>
-                            </v-row>
-                            <v-row>
-                                <v-col cols="12">
-                                    <v-btn
-                                        type="submit"
-                                        block
-                                        x-large
-                                        color="success"
-                                        class="white--text"
-                                        @click="login()"
-                                    >
-                                        {{$t('reminder.login')}}
-                                    </v-btn>
-                                </v-col>
-                            </v-row>
-                        </v-container>
-                    </v-form>
-                </v-card>
-                <v-card v-else-if="e1 == 3">
-                    <v-form
-                        ref="form1"
-                        v-model="valid"
-                        lazy-validation
-                        @submit.prevent="reminder"
-                    >
-                        <v-container fluid>
-                            <v-row class="p-login_content-inner">
-                                <v-col cols="12" class="align-self-center">
-                                    <p align="center" v-html="$t('reminder.send_emailed')"></p>
-                                </v-col>
-                            </v-row>
-                        </v-container>
-                    </v-form>
-                </v-card>
+                </div>
+                <!-- Set New Password Success -->
+                <div v-else-if="e1 == 4" class="p-reminder_message">
+                    <v-card-title class="flex-column align-start">
+                        <div class="c-link mb-3">
+                            <NuxtLink :to="localePath('/')" class="c-body_01--bold">
+                                {{ $t('reminder.back_to_signin') }}
+                            </NuxtLink>
+                        </div>
+                        <h2 class="mb-2 c-heading_01--black">
+                            {{$t('reminder.update_ok')}}
+                        </h2>
+                        <p class="c-body c-body_02--regular">{{$t('reminder.update_success')}}</p>
+                    </v-card-title>
+                </div>
             </v-col>
         </v-row>
     </div>
