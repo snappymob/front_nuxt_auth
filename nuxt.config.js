@@ -70,7 +70,20 @@ export default {
     /*
    ** Nuxt.js dev-modules
    */
-    buildModules: ['@nuxtjs/vuetify'],
+    buildModules: [
+        '@nuxtjs/vuetify',
+        '@nuxtjs/google-fonts'
+    ],
+    /*
+    ** Installed Google Fonts configuration
+    */
+   googleFonts: {
+    families: {
+        'Noto+Sans+JP': {
+            wght: [400, 500, 700, 900]
+        }
+    }
+   },
     /*
    ** Nuxt.js modules
    */
