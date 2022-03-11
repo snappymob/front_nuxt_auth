@@ -1,27 +1,13 @@
 <template>
-    <div class="p-login_content elevation-7">
-        <v-row class="p-login_row">
-            <v-col class="pa-0 col-sm-6 col-12">
+    <div class="p-login_content">
+        <div class="d-flex p-login_wrapper">
+            <div class="flex-grow-1 login_wrapper--left">
                 <div class="p-login_intro">
                     <img src="~/assets/images/img_login-background.png" class="p-login_background">
-                    <img src="~/assets/images/img_members-cloud-white.png" width="225px" height="42px" class="p-login_logo">
-                    <!-- <div class="p-login_intro-text">
-                        <h1 class="heading">
-                            <span v-html="$t('reminder.back_to_login')"></span>
-                            <v-icon
-                                dark
-                                right
-                                large
-                                class="icon"
-                            >
-                                mdi-undo-variant
-                            </v-icon>
-                        </h1>
-                        <p v-html="$t('reminder.sign_up')"></p>
-                    </div> -->
+                    <img v-if="$vuetify.breakpoint.smAndUp" src="~/assets/images/img_members-cloud-white.png" width="225px" height="42px" class="p-login_logo">
                 </div>
-            </v-col>
-            <v-col class="pa-0 col-sm-6 col-12">
+            </div>
+            <div class="flex-grow-1 login_wrapper--right my-10">
                 <!-- Reset Password -->
                 <div v-if="e1 == 1" class="p-login_form">
                     <v-form
@@ -72,7 +58,7 @@
                     </v-form>
                 </div>
                 <!-- Reset Password Success -->
-                <div v-else-if="e1 == 3" class="p-reminder_message">
+                <div v-else-if="e1 == 3" class="p-login_message">
                     <v-card-title class="flex-column align-start">
                         <div class="c-link mb-3">
                             <NuxtLink :to="localePath('/')" class="c-link_icon c-body_01--bold">
@@ -111,7 +97,11 @@
                                     <div class="mb-3 c-body c-body_02--medium">
                                         <label>{{$t('reminder.temp_password')}}</label>
                                     </div>
-                                    <v-text-field class="v-text-field-custom" v-model="temp_pwd" :type="text" label="" solo />
+                                    <v-text-field
+                                        class="v-text-field-custom"
+                                        v-model="temp_pwd"
+                                        :type="text"
+                                        solo />
                                 </v-col>
                             </v-row>
                             <v-row>
@@ -125,9 +115,7 @@
                                         :append-icon="password_show ? 'mdi-eye' : 'mdi-eye-off'"
                                         :rules="[rules.required, rules.password_min]"
                                         :type="password_show ? 'text' : 'password'"
-                                        label=""
                                         :hint="$t('reminder.rule')"
-                                        counter
                                         solo
                                         @click:append="password_show = !password_show"
                                     />
@@ -148,9 +136,7 @@
                                             rules.password2,
                                         ]"
                                         :type="password_show2 ? 'text' : 'password'"
-                                        label=""
                                         :hint="$t('reminder.rule')"
-                                        counter
                                         solo
                                         @click:append="password_show2 = !password_show2"
                                     />
@@ -172,7 +158,7 @@
                     </v-form>
                 </div>
                 <!-- Set New Password Success -->
-                <div v-else-if="e1 == 4" class="p-reminder_message">
+                <div v-else-if="e1 == 4" class="p-login_message">
                     <v-card-title class="flex-column align-start">
                         <div class="c-link mb-3">
                             <NuxtLink :to="localePath('/')" class="c-link_icon c-body_01--bold">
@@ -186,8 +172,8 @@
                         <p class="c-body c-body_02--regular">{{$t('reminder.update_success')}}</p>
                     </v-card-title>
                 </div>
-            </v-col>
-        </v-row>
+            </div>
+        </div>
     </div>
 </template>
 

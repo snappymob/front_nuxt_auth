@@ -2,26 +2,28 @@
     <client-only>
         <!-- Main Login -->
         <div v-if="!auth.loggedIn" class="p-login_content">
-            <v-row class="p-login_row">
-                <v-col class="pa-0 col-sm-6 col-12">
+            <div class="d-flex p-login_wrapper">
+                <div class="flex-grow-1 login_wrapper--left">
                     <div class="p-login_intro">
                         <img src="~/assets/images/img_login-background.png" class="p-login_background">
-                        <img src="~/assets/images/img_members-cloud-white.png" width="225px" height="42px" class="p-login_logo">
-                        <!-- <div class="p-login_intro-text">
-                            <h1 class="heading">
-                                <span v-html="$t('login.welcomeback')"></span>
-                            </h1>
-                            <p>{{$t('login.message')}}</p>
-                            <p>
-                                {{$t('login.demoaccount')}}<br>
-                                <strong>{{$t('common.sitekey')}}：</strong> dev-nuxt-auth<br>
-                                <strong>{{$t('common.id')}}：</strong>demo@kuroco-mail.app<br>
-                                <strong>{{$t('common.password')}}：</strong>demo0512<br>
-                            </p>
-                        </div> -->
+                        <template v-if="$vuetify.breakpoint.smAndUp">
+                            <img src="~/assets/images/img_members-cloud-white.png" width="225px" height="42px" class="p-login_logo">
+                            <div class="p-login_intro-text">
+                                <!-- <h1 class="heading">
+                                    <span v-html="$t('login.welcomeback')"></span>
+                                </h1>
+                                <p>{{$t('login.message')}}</p> -->
+                                <p>
+                                    {{$t('login.demoaccount')}}<br>
+                                    <strong>{{$t('common.sitekey')}}：</strong> dev-nuxt-auth<br>
+                                    <strong>{{$t('common.id')}}：</strong>demo@kuroco-mail.app<br>
+                                    <strong>{{$t('common.password')}}：</strong>demo0512<br>
+                                </p>
+                            </div>
+                        </template>
                     </div>
-                </v-col>
-                <v-col class="pa-0 col-sm-6 col-12">
+                </div>
+                <div class="flex-grow-1 my-10 login_wrapper--right">
                     <div class="p-login_form">
                         <form @submit.prevent="login">
                             <div class="login-screen lgn-left">
@@ -84,8 +86,8 @@
                             </div>
                         </form>
                     </div>
-                </v-col>
-            </v-row>
+                </div>
+            </div>
         </div>
         <!-- Main Dashboard -->
         <div v-else class="mypage">
