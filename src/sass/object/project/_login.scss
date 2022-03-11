@@ -1,89 +1,104 @@
+// Styling to handle contents inside login page
 .p-login {
-    //background: linear-gradient(to bottom, #0f1015, #07080a) !important;
-    background: linear-gradient(to bottom, #43a8ff, #1777ca) !important;
-    
-    &_form {
-        margin: 0 auto;
-        padding: 25px;
-        max-width: 600px;
-        color: #fff;
-        border-radius: 0 10px 10px 0 !important;
-        
-        @include sm {
-            border-radius: 0 0 10px 10px !important;   
+    &_intro {
+        &-text {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            transform: translateY(-50%);
+            top: 50%;
+            z-index: 3;
         }
+    }
+    &_form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+
+        form {
+            font-size: 20px;
+            max-width: 480px;
+        }
+
         & .submit-btn {
             width: 100%;
         }
     }
     &_content {
-        top: 50%;
-        transform: translateY(-50%);
-        position: relative;
-        max-width: 900px;
-        margin: 0 auto;
-
-        @include lg {
-            margin: 0 15px;
-        }
-        &-inner {
-            min-height: 300px;
-        }
-    }
-    &_intro {
-        //background: linear-gradient(to bottom, #2a91e9, #196eb7) !important;
-        background: linear-gradient(to bottom, #152E4D, #051324) !important;
-        height: 100%;
-        padding: 25px;
-        color: #fff;
-        position: relative;
-        border-radius: 10px 0 0 10px;
-        overflow: hidden;
-
-        @include sm {
-            border-radius: 10px 10px 0 0 !important;   
-        }
-        &::before {
-            content: "";
-            opacity: 0.1;
-            width: 100%;
-            height: 200px;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            background-image: linear-gradient(to bottom, #051324, rgba(0,0,0,0)), radial-gradient(circle, #fff 30%, transparent 10%), radial-gradient(circle, #fff 30%, transparent 10%);
-            background-size: 100%, 10px 10px, 10px 10px;
-            background-position: 0 0, 0 0, 50px 50px;
-            background-repeat: repeat;
-        }
-        &-text {
-            top: 50%;
-            position: relative;
-            transform: translateY(-50%);
-
-            @include sm {
-                transform: none;
-                top: 0;
-            }
-            & .heading {
-                color: #fff;
-            }
-        }
-    }
-    &_logo {
-        max-width: 250px;
-        display: block;
-        margin: 0 auto;
-        position: absolute;
         width: 100%;
-        left: 0;
-        right: 0;
-        margin: 0 auto;
-        top: 40px;
+        height: 100%;
+        position: relative;
+    }
+    &_message {
+        display: flex;
+        padding-top: 140px;
+        height: 100%;
+        width: 100%;
+        justify-content: center;
 
-        @include sm {
+        .v-card__title {
+            max-width: 480px;
+        }
+    }
+}
+
+// Styling to handle main Login page layout responsiveness
+.p-login_wrapper {
+    height: 100vh;
+
+    .login_wrapper--left, .login_wrapper--right {
+        width: 50%;
+    }
+
+    .login_wrapper--left {
+        .p-login_intro {
             position: relative;
-            top: 0;
+            height: 100%;
+
+            .p-login_background {
+                display: block;
+                z-index: 2;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+
+            .p-login_logo {
+                position: relative;
+                z-index: 3;
+                top: 50px;
+                left: 53px;
+            }
+        }
+    }
+
+    @include sm {
+        flex-direction: column-reverse;
+        overflow: scroll;
+
+        .login_wrapper--left, .login_wrapper--right {
+            width: 100%;
+        }
+
+        .login_wrapper--left {
+            height: 90px;
+
+            .p-login_intro {
+                .p-login_background {
+                    position: relative;
+                }
+            }
+        }
+
+        .login_wrapper--right {
+            height: 100%;
         }
     }
 }

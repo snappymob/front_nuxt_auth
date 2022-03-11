@@ -57,4 +57,16 @@
             width: 100%;
         }
     }
+
+}
+
+.v-text-field-custom {
+    .v-input__slot {
+        box-shadow: none !important;
+        border: 2px solid $neutral100;
+
+        &:hover {
+            border: 2px solid $primary500;
+        }
+    }
 }
